@@ -1,6 +1,6 @@
 Odoo Client Library
 --
-Yet Another SLibrary Nothing Fancy here This is very SIMPLE and STUPID, Pything based Odoo Client Library make use of Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Methods.
+Just Another library, Nothing Fancy designed here, This is very SIMPLE and STUPID, Python based Odoo Client Library to makeuseof Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Odoo like Simpler Methods. Function are simple and and long list of function avaliable to simplify the job. This is designed to save lot of typing time and some of development time everytime when you wanna use Odoo Web Services.
 
 Usage Example.
 
