@@ -6,7 +6,7 @@ Usage Example.
 
 Add api directory `odooclient` in our project and import and it ready to user, below is simple example of usage.
 
-
+```
 from odooclient import client
 
 print "="*100
@@ -40,6 +40,6 @@ odoo.SearchRead('res.partner', [('name', 'like', 'Odoo')], ['name'])
 odoo.Authenticate('demo', 'demo')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner' )
-
+```
 
 Note: This is Still development copy not finalized.
