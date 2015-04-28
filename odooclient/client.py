@@ -91,6 +91,20 @@ class OdooClient(object):
             results.update({mode: response})
         return results
 
+    def ModelMethod(self, model, method, *args, **kwrags):
+        """
+		Generic Method Call if you don;t find specific implementation.
+		
+        models.execute_kw(db, uid, password,
+            '<any model>', '<any methos>', args1, args1, ..., argsN
+            {'kwy': ['val1', 'val2', 'valn'], 'key2': val2})
+        """
+        if not kwrags: kwrags = {}
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                        method, *args, **kwrags)
+        return response
+
     def Read(self, model, document_ids, fields=False, context=None):
         """
         models.execute_kw(db, uid, password,
