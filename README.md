@@ -3,6 +3,13 @@
 
 Very SIMPLE and STUPID Pythonic Odoo Client Library to make-use-of Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Methods.
 
+##__Features:__
+- Basic-Generic **ORM API** (create, read, write, unlink ...) CRUD.
+- Generic **ORM Research API** (search, search_read, search_count, name_search ...).
+- Generic superset **Method** to avoid implmentation (symmetric code but need to be attentive).
+- Easy **SaaS/HTTPS or Local Instance/Database** Connection styles.
+
+
 --
 
 
@@ -11,9 +18,9 @@ Very SIMPLE and STUPID Pythonic Odoo Client Library to make-use-of Odoo WebServi
 - Add api directory `odooclient` to project.
 - Import `from odooclient import client`.
 
-##below is simple example of usage.
+##Below are examples of `odoo-client-api` usage : 
 
---
+-
 
 ##Saas Test
 ```python
@@ -24,7 +31,7 @@ odoo.ServerInfo()
 odoo.Authenticate('admin', 'admin')
 ```
 
---
+-
 
 ##SaaS Security Test
 ```python
@@ -36,7 +43,7 @@ odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner')
 ```
 
---
+-
 
 ##Local Test
 ```python
@@ -58,7 +65,7 @@ allids = [o[0] for o in odoo.NameSearch("res.partner", "jigar")]
 odoo.Unlink("res.partner", allids)
 ```
 
---
+-
 
 ##Local Security Test
 ```python
@@ -71,7 +78,8 @@ odoo.CheckSecurity('res.partner' )
 ```
 
 ###Generic method `Method`
---
+
+-
 
 For More Control Over API , Generic `Method` is also implemented, where you can call any method from API, but you have to care full in passing Params :
 
@@ -85,4 +93,16 @@ But this can be also called using Generic method `Method`which look like:
 ```
 This sounds more Raw and generic but doesn't make difference in this case as create being generic ORM method, but any method implementation specific to Model can be called using `Method`, this enable Extended API feature.
 
+
 Note: This is Still development copy not finalized.
+
+##P.S. :
+
+Feature to be Added are : 
+
+- Wrokflow methods
+- Report Priting API
+- Tools lib.
+ - CSV reader
+ - Server Friendly Text Sanitizer
+- A Fork with ODBC Features.
