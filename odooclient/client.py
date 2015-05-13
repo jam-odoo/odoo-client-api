@@ -91,19 +91,19 @@ class OdooClient(object):
             results.update({mode: response})
         return results
 
-    def ModelMethod(self, model, method, *args, **kwrags):
+    def Method(self, model, method, *args, **kwrags):
         """
-		Generic Method Call if you don;t find specific implementation.
+        Generic Method Call if you don't find specific implementation.
 		
         models.execute_kw(db, uid, password,
-            '<any model>', '<any methos>', args1, args1, ..., argsN
+            '<any model>', '<any method>', args1, args1, ..., argsN
             {'kwy': ['val1', 'val2', 'valn'], 'key2': val2})
         """
         if not kwrags: kwrags = {}
         service = connection.Connection(self._url)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         method, *args, **kwrags)
-        return response
+        return response 
 
     def Read(self, model, document_ids, fields=False, context=None):
         """
@@ -180,6 +180,25 @@ class OdooClient(object):
                                         fields=fields, **kwargs)
         return response
 
+    def NameSearch(self, model, name, domain=False, context=None,**kwargs):
+        """
+        name_search(name='', domain=None, operator='ilike', limit=100)
+
+        models.execute_kw(db, uid, password,
+            'res.partner', 'name_search',<name_to_search>
+            [[['is_company', '=', True], ['customer', '=', True]]],
+            {'offset': 10, 'limit': 5})
+
+        """
+        if not context:
+            context = {}
+        if not kwargs:
+            kwargs ={}
+        kwargs.update({'context': context})
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                        'name_search', name, domain or [], **kwargs)
+        return response
 
     def Create(self, model, values, context=None):
         """
@@ -196,6 +215,23 @@ class OdooClient(object):
                                             'create', values, context=context)
         return response
 
+    def NameCreate(self, model, name, context=None):
+        """
+        name_create(name, context)
+
+        models.execute_kw(db, uid, password,
+            'res.partner', 'name_create',<name_to_search>
+            [[['is_company', '=', True], ['customer', '=', True]]],
+            {'offset': 10, 'limit': 5})
+
+        """
+        if not context:
+            context = {}
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                        'name_create', name, context=context)
+        return response
+
     def Write(self, model, document_ids, values, context=None):
         """
         write(self, vals):
@@ -209,7 +245,6 @@ class OdooClient(object):
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'write', document_ids, values, context=context)
         return response
-
 
     def GetFields(self, model, context=None, attributes=None):
         """
@@ -226,3 +261,29 @@ class OdooClient(object):
         response = service.Model(self._db, self._uid, self._password, model, 
                         'fields_get', context=context, attributes=attributes)
         return response
+
+    def Unlink(self, model, document_ids, context=None):
+        """
+
+        models.execute_kw(db, uid, password, 
+                          'res.partner', 'unlink', [[id]])
+        """
+        if not context: context = {}
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'unlink', document_ids, context=context)
+        return response
+
+    def Copy(self, model, document_ids, default=None, context=None):
+        """
+        copy(default=None)
+        models.execute_kw(db, uid, password, 
+                          'res.partner', 'copy', [id], {'field1': "default values"})
+        """
+        if not context: context = {}
+        if not default: default = {}
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'copy', document_ids, default=default, context=context)
+        return response
+

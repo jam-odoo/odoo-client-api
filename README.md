@@ -1,12 +1,12 @@
 Odoo Client Library
 --
-Just Another library, Nothing Fancy designed here, This is very SIMPLE and STUPID, Python based Odoo Client Library to makeuseof Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Odoo like Simpler Methods. Function are simple and and long list of function avaliable to simplify the job. This is designed to save lot of typing time and some of development time everytime when you wanna use Odoo Web Services.
+Yet Another SLibrary Nothing Fancy here This is very SIMPLE and STUPID, Pything based Odoo Client Library make use of Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Methods.
 
 Usage Example.
 
 Add api directory `odooclient` in our project and import and it ready to user, below is simple example of usage.
 
-```
+
 from odooclient import client
 
 print "="*100
@@ -21,7 +21,7 @@ odoo.SearchCount('res.partner')
 odoo.SearchRead('res.partner', [], ['name'])
 odoo.GetFields('res.partner')
 
-#Lcoal Security Test
+#Local Security Test
 odoo.Authenticate('a@b.com', 'a')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner')
@@ -36,10 +36,28 @@ odoo.SearchCount('res.partner')
 odoo.Write('res.partner', [rid], {'name': 'Odoo'})
 odoo.Search('res.partner', [('name', 'like', 'Odoo')], order='id desc')
 odoo.SearchRead('res.partner', [('name', 'like', 'Odoo')], ['name'])
+odoo.GetFields('res.partner')
+odoo.Copy('res.partner', record_id,{'name': "jigar"})
+odoo.NameCreate('res.partner',"jigar")
+allids = [o[0] for o in odoo.NameSearch("res.partner", "jigar")]
+odoo.Unlink("res.partner", allids)
+
 #Local Security Test
 odoo.Authenticate('demo', 'demo')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner' )
-```
+
+
+For More Control Over API , Generic `Method` is also implemented, where you can call any method from API, but you have to care full in passing Params :
+
+Method  `create` with odoo-client-lib API  look like :
+
+    odoo.Create('res.partner', {'name': "Odoo"})
+
+But this can be also called using Generic method `Method`which look like:
+
+   odoo.Method('res.partner', 'create', {'name': "Odoo"})
+
+This sounds more Raw and generic but doesn't make difference in this case as create being generic ORM method, but any method implementation specific to Model can be called using `Method`, this enable Extended API feature.
 
 Note: This is Still development copy not finalized.
