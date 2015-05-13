@@ -1,10 +1,19 @@
-#Odoo Client Library
+#**Odoo Client Library**
 --
+
 Very SIMPLE and STUPID Pythonic Odoo Client Library to make-use-of Odoo WebServices. It is designed to wrap all XML RPC Technicality into more object-orientated meaning of programming using class and dedicated Methods.
 
-Usage Example.
+--
 
-Add api directory `odooclient` in our project and import and it ready to user, below is simple example of usage.
+
+##Usage:
+
+- Add api directory `odooclient` to project.
+- Import `from odooclient import client`.
+
+##below is simple example of usage.
+
+--
 
 ##Saas Test
 ```python
@@ -15,6 +24,8 @@ odoo.ServerInfo()
 odoo.Authenticate('admin', 'admin')
 ```
 
+--
+
 ##SaaS Security Test
 ```python
 from odooclient import client
@@ -24,6 +35,8 @@ odoo.Authenticate('a@b.com', 'a')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner')
 ```
+
+--
 
 ##Local Test
 ```python
@@ -45,6 +58,8 @@ allids = [o[0] for o in odoo.NameSearch("res.partner", "jigar")]
 odoo.Unlink("res.partner", allids)
 ```
 
+--
+
 ##Local Security Test
 ```python
 from odooclient import client
@@ -55,6 +70,8 @@ odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner' )
 ```
 
+###Generic method `Method`
+--
 
 For More Control Over API , Generic `Method` is also implemented, where you can call any method from API, but you have to care full in passing Params :
 
