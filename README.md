@@ -7,7 +7,7 @@ Usage Example.
 Add api directory `odooclient` in our project and import and it ready to user, below is simple example of usage.
 
 ##Saas Test
-```
+```python
 from odooclient import client
 
 odoo = client.OdooClient( host='demo.odoo.com', dbname='firebug', saas=True, debug=True)
@@ -16,7 +16,7 @@ odoo.Authenticate('admin', 'admin')
 ```
 
 ##SaaS Security Test
-```
+```python
 from odooclient import client
 
 odoo = client.OdooClient( host='demo.odoo.com', dbname='firebug', saas=True, debug=True)
@@ -26,7 +26,7 @@ odoo.CheckSecurity('res.partner')
 ```
 
 ##Local Test
-```
+```python
 from odooclient import client
 
 odoo = client.OdooClient(protocol='xmlrpc', host='localhost', dbname='test', port=8069, debug=True)
@@ -46,7 +46,7 @@ odoo.Unlink("res.partner", allids)
 ```
 
 ##Local Security Test
-```
+```python
 from odooclient import client
 
 odoo = client.OdooClient(protocol='xmlrpc', host='localhost', dbname='test', port=8069, debug=True)
