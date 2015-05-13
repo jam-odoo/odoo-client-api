@@ -19,6 +19,7 @@ odoo.Authenticate('admin', 'admin')
 ```
 from odooclient import client
 
+odoo = client.OdooClient( host='demo.odoo.com', dbname='firebug', saas=True, debug=True)
 odoo.Authenticate('a@b.com', 'a')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner')
@@ -48,6 +49,7 @@ odoo.Unlink("res.partner", allids)
 ```
 from odooclient import client
 
+odoo = client.OdooClient(protocol='xmlrpc', host='localhost', dbname='test', port=8069, debug=True)
 odoo.Authenticate('demo', 'demo')
 odoo.CheckSecurity('res.users', ['create'])
 odoo.CheckSecurity('res.partner' )
