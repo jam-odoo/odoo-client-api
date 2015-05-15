@@ -287,3 +287,78 @@ class OdooClient(object):
                                 'copy', document_ids, default=default, context=context)
         return response
 
+    def CreateWorkflow(self, model, document_ids, context=None):
+        """
+        def create_workflow(self, cr, uid, ids, context=None):
+            Create a workflow instance for each given record IDs    
+        """
+        if not context: context = {}
+        if type(document_ids) not in (int, long, list, tuple):
+            raise Exception("Document Ids expected to be in int, long list or tuple format.")
+        if type(document_ids) in (int, long):
+            document_ids = [document_ids]
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'create_workflow', document_ids, context=context)
+        return response
+
+    def UnlinkWorkflow(self, model, document_ids, context=None):
+        """
+        def delete_workflow(self, cr, uid, ids, context=None):
+        Delete the workflow instances bound to the given record IDs.
+        """
+        if not context: context = {}
+        if type(document_ids) not in (int, long, list, tuple):
+            raise Exception("Document Ids expected to be in int, long list or tuple format.")
+        if type(document_ids) in (int, long):
+            document_ids = [document_ids]
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'delete_workflow', document_ids, context=context)
+        return response
+
+    def StepWorkflow(self, model, document_ids, context=None):
+        """
+        def step_workflow(self, cr, uid, ids, context=None):
+        Reevaluate the workflow instances of the given record IDs.
+
+        """
+        if not context: context = {}
+        if type(document_ids) not in (int, long, list, tuple):
+            raise Exception("Document Ids expected to be in int, long list or tuple format.")
+        if type(document_ids) in (int, long):
+            document_ids = [document_ids]
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'step_workflow', document_ids, context=context)
+        return response
+
+    def SignalWorkflow(self, model, document_ids, signal, context=None):
+        """
+        def signal_workflow(self, cr, uid, ids, signal, context=None):
+        Send given workflow signal and return a dict mapping ids to workflow results
+        """
+        if not context: context = {}
+        if type(document_ids) not in (int, long, list, tuple):
+            raise Exception("Document Ids expected to be in int, long list or tuple format.")
+        if type(document_ids) in (int, long):
+            document_ids = [document_ids]
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'signal_workflow', document_ids, signal,context=context)
+        return response
+
+    def RedirectWorkflow(self, model, old_new_ids, context=None):
+        """
+        def redirect_workflow(self, cr, uid, old_new_ids, context=None):
+        Rebind the workflow instance bound to the given 'old' record IDs to
+            the given 'new' IDs. (``old_new_ids`` is a list of pairs ``(old, new)``.
+        """
+        if not context: context = {}
+        if type(old_new_ids) not in (list, tuple):
+            raise Exception("Document Ids expected to be in  list/tuple of tuples [(1,2)] format.")
+        service = connection.Connection(self._url)
+        response = service.Model(self._db, self._uid, self._password, model, 
+                                'redirect_workflow', old_new_ids, context=context)
+        return response
+
