@@ -32,6 +32,13 @@ odoo.Copy('res.partner', record_id,{'name': "jigar"})
 odoo.NameCreate('res.partner',"jigar")
 allids = [o[0] for o in odoo.NameSearch("res.partner", "jigar")]
 odoo.Unlink("res.partner", allids)
+#Workflow methods
+odoo.UnlinkWorkflow('account.invoice', 1)
+odoo.CreateWorkflow('account.invoice', 1)
+odoo.StepWorkflow('account.invoice', 1)
+odoo.SignalWorkflow('account.invoice', 1, 'invoice_open')
+odoo.RedirectWorkflow('account.invoice', [(1,2)])
+
 
 #Security Test
 odoo.Authenticate('demo', 'demo')

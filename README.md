@@ -7,6 +7,7 @@ Very SIMPLE and STUPID Pythonic Odoo Client Library to make-use-of Odoo WebServi
 - Basic-Generic **ORM API** (create, read, write, unlink ...) CRUD.
 - Generic **ORM Research API** (search, search_read, search_count, name_search ...).
 - Generic superset **Method** to avoid implmentation (symmetric code but need to be attentive).
+- Dedicated **WORKFLOW Methods** to drive business process smoothly.
 - Easy **SaaS/HTTPS or Local Instance/Database** Connection styles.
 
 
@@ -93,6 +94,24 @@ But this can be also called using Generic method `Method`which look like:
 ```
 This sounds more Raw and generic but doesn't make difference in this case as create being generic ORM method, but any method implementation specific to Model can be called using `Method`, this enable Extended API feature.
 
+###Workflow methods :
+
+-
+
+Odoo has every powerful workflow engine and the lib facilitate you `workflow` engine methods like Create workflow for some record, or delete the workflow, validate workflow, trigger workflow signals. Below are example of all available methods that can be used.
+
+```
+from odooclient import client
+
+odoo = client.OdooClient(protocol='xmlrpc', host='localhost', dbname='asd', port=8069, debug=True)
+odoo.Authenticate('admin', 'admin')
+print odoo.UnlinkWorkflow('account.invoice', 58328)
+print odoo.CreateWorkflow('account.invoice', 58328)
+print odoo.StepWorkflow('account.invoice', 58328)
+print odoo.SignalWorkflow('account.invoice', 58328, 'invoice_open')
+print odoo.RedirectWorkflow('account.invoice', [(58328,58329)])
+```
+
 
 Note: This is Still development copy not finalized.
 
@@ -100,9 +119,8 @@ Note: This is Still development copy not finalized.
 
 Feature to be Added are : 
 
-- Wrokflow methods
 - Report Priting API
 - Tools lib.
  - CSV reader
- - Server Friendly Text Sanitizer
+ - Server Friendly Text Sanitizer(Unicode, UTF-8)
 - A Fork with ODBC Features.
