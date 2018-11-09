@@ -18,7 +18,7 @@ class OdooClient(object):
 
 
     """
-    def __init__(self, protocol='xmlrpc', host='localhost', port=8069, dbname=None, saas=False, debug=False):
+    def __init__(self, protocol='xmlrpc', host='localhost', port=8069, version=2, dbname=None, saas=False, debug=False):
         if debug:
             logging.basicConfig(level=logging.DEBUG)
         if saas:
@@ -30,6 +30,7 @@ class OdooClient(object):
         self._host = host
         self._port = port
         self._db = dbname
+        self._version = version
 
         self._login = False
         self._password = False
@@ -57,7 +58,7 @@ class OdooClient(object):
             common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url))
             common.version()
         """
-        cn = connection.Connection(self._url)
+        cn = connection.Connection(self._url, version=self._version)
         self._serverinfo = cn.GetServerInfo()
         return self._serverinfo
 
@@ -72,9 +73,22 @@ class OdooClient(object):
             uid = common.authenticate(db, username, password, {})
         """
         self._login, self._password = login, pwd
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         self._uid = service.Authenticate(self._db, login, pwd, {})
         return self._uid
+
+    def Login(self, login, pwd):
+        """
+        Code :
+            common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+        """
+        self._login, self._password = login, pwd
+        service = connection.Connection(self._url, version=self._version)
+        self._uid = service.Login(self._db, login, pwd)
+        return self._uid
+
+
 
     def CheckSecurity(self, model, operation_modes=['read']):
         """
@@ -83,7 +97,7 @@ class OdooClient(object):
                                         'res.partner', 'check_access_rights',
                                         ['read'], {'raise_exception': False})
         """
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         results = dict.fromkeys(operation_modes, False)
         for mode in operation_modes:
             response = service.Model(self._db, self._uid, self._password, model, \
@@ -100,7 +114,7 @@ class OdooClient(object):
             {'kwy': ['val1', 'val2', 'valn'], 'key2': val2})
         """
         if not kwrags: kwrags = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         method, *args, **kwrags)
         return response 
@@ -117,8 +131,8 @@ class OdooClient(object):
             msg = "Invalid ids `type` {ids}. Ids should be on type `int`, \
                                     `long`, `list` or 'tuple'.".format(ids=ids)
             return (False, msg)
-        service = connection.Connection(self._url)
-        response = service.Model(self._db, self._uid, self._password, model, 'read', document_ids, {'fields': fields, 'context':context})
+        service = connection.Connection(self._url, version=self._version)
+        response = service.Model(self._db, self._uid, self._password, model, 'read', document_ids, fields=fields, context=context)
         return response
 
     def Search(self, model, domain=False, context=None,**kwargs):
@@ -136,7 +150,7 @@ class OdooClient(object):
         if not kwargs:
             kwargs ={}
         kwargs.update({'context': context})
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         'search', domain or [], **kwargs)
         return response
@@ -152,7 +166,7 @@ class OdooClient(object):
         """
         if not context:
             context = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         'search_count', domain or [], context=context)
         return response
@@ -174,7 +188,7 @@ class OdooClient(object):
             kwargs ={}
         kwargs.update({'context': context})
 
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         'search_read', domain or [],
                                         fields=fields, **kwargs)
@@ -195,7 +209,7 @@ class OdooClient(object):
         if not kwargs:
             kwargs ={}
         kwargs.update({'context': context})
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         'name_search', name, domain or [], **kwargs)
         return response
@@ -210,7 +224,7 @@ class OdooClient(object):
 
         """
         if not context: context = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                             'create', values, context=context)
         return response
@@ -227,7 +241,7 @@ class OdooClient(object):
         """
         if not context:
             context = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                         'name_create', name, context=context)
         return response
@@ -241,7 +255,7 @@ class OdooClient(object):
         }])
         """
         if not context: context = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'write', document_ids, values, context=context)
         return response
@@ -257,7 +271,7 @@ class OdooClient(object):
         if not context: context = {}
         if not attributes: attributes = []
 
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                         'fields_get', context=context, attributes=attributes)
         return response
@@ -269,7 +283,7 @@ class OdooClient(object):
                           'res.partner', 'unlink', [[id]])
         """
         if not context: context = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'unlink', document_ids, context=context)
         return response
@@ -282,7 +296,7 @@ class OdooClient(object):
         """
         if not context: context = {}
         if not default: default = {}
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'copy', document_ids, default=default, context=context)
         return response
@@ -297,7 +311,7 @@ class OdooClient(object):
             raise Exception("Document Ids expected to be in int, long list or tuple format.")
         if type(document_ids) in (int, long):
             document_ids = [document_ids]
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'create_workflow', document_ids, context=context)
         return response
@@ -312,7 +326,7 @@ class OdooClient(object):
             raise Exception("Document Ids expected to be in int, long list or tuple format.")
         if type(document_ids) in (int, long):
             document_ids = [document_ids]
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'delete_workflow', document_ids, context=context)
         return response
@@ -328,7 +342,7 @@ class OdooClient(object):
             raise Exception("Document Ids expected to be in int, long list or tuple format.")
         if type(document_ids) in (int, long):
             document_ids = [document_ids]
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'step_workflow', document_ids, context=context)
         return response
@@ -343,7 +357,7 @@ class OdooClient(object):
             raise Exception("Document Ids expected to be in int, long list or tuple format.")
         if type(document_ids) in (int, long):
             document_ids = [document_ids]
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'signal_workflow', document_ids, signal,context=context)
         return response
@@ -357,8 +371,24 @@ class OdooClient(object):
         if not context: context = {}
         if type(old_new_ids) not in (list, tuple):
             raise Exception("Document Ids expected to be in  list/tuple of tuples [(1,2)] format.")
-        service = connection.Connection(self._url)
+        service = connection.Connection(self._url, version=self._version)
         response = service.Model(self._db, self._uid, self._password, model, 
                                 'redirect_workflow', old_new_ids, context=context)
         return response
 
+    def PrintReport(self, report_service, record_ids, context=None):
+        """
+        invoice_ids = models.execute_kw(
+            db, uid, password, 'account.invoice', 'search',
+            [[('type', '=', 'out_invoice'), ('state', '=', 'open')]])
+        report = xmlrpclib.ServerProxy('{}/xmlrpc/2/report'.format(url))
+        result = report.render_report(
+            db, uid, password, 'account.report_invoice', invoice_ids)
+        report_data = result['result'].decode('base64')
+
+        """
+        if not context: context = {}
+        service = connection.Connection(self._url, version=self._version)
+        response = service.Report(self._db, self._uid, self._password, report_service, 
+                                            record_ids, context=context)
+        return response

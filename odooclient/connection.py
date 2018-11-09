@@ -28,7 +28,10 @@ class ServiceManager(object):
         self._service = service
         self._version = version
         self._url = url
-        self._proxy = xmlrpclib.ServerProxy("{url}/xmlrpc/{version}/{service}".format(url=self._url, version=self._version, service=self._service))
+        if version:
+            self._proxy = xmlrpclib.ServerProxy("{url}/xmlrpc/{version}/{service}".format(url=self._url, version=self._version, service=self._service), allow_none=True)
+        else:
+            self._proxy = xmlrpclib.ServerProxy("{url}/xmlrpc/{service}".format(url=self._url, service=self._service), allow_none=True)
 
     def Trasmit(self, method, *args, **kwargs):
         try:
@@ -63,12 +66,24 @@ class Connection(object):
         return "<Object Connection-{url}>".format(url=self._url)
 
     def GetServerInfo(self):
-        self._serverinfo = ServiceManager(self._url,'common').Trasmit('version')
+        self._serverinfo = ServiceManager(self._url,'common', self._version).Trasmit('version')
         return self._serverinfo
 
     def Authenticate(self, db, user, password, session={}):
         try:
-            response = ServiceManager(self._url,'common').Trasmit('authenticate', db, user, password, session)
+            response = ServiceManager(self._url,'common', self._version).Trasmit('authenticate', db, user, password, session)
+            if response:
+                _logger.debug("Successful Authentication of `{user}` Using Database `{db}`.".format(user=user, db=db))
+            else:
+                _logger.debug("Unsuccessful Authentication Attempt of `{user}` Using Database `{db}`.".format(user=user, db=db))
+            return response
+        except Exception, e:
+            print "Authenticate Exception :\n  %s \n"%(e)
+            pass
+
+    def Login(self, db, user, password):
+        try:
+            response = ServiceManager(self._url,'common', self._version).Trasmit('login', db, user, password)
             if response:
                 _logger.debug("Successful Authentication of `{user}` Using Database `{db}`.".format(user=user, db=db))
             else:
@@ -80,9 +95,23 @@ class Connection(object):
 
     def Model(self, db, uid, password, model, method, *args, **kwrags):
         try:
-            response = ServiceManager(self._url,'object').Trasmit('execute_kw', db, uid, password, model, method, args, kwrags)
+            if self._version:
+                response = ServiceManager(self._url,'object', self._version).Trasmit('execute_kw', db, uid, password, model, method, args, kwrags)
+            else:
+                response = ServiceManager(self._url,'object', self._version).Trasmit('execute', db, uid, password, model, method, *args, **kwrags)
             return response
         except Exception, e:
             print "Unknown Exception :\n  %s \n"%(e)
             pass
 
+
+    def Report(self, db, uid, password, report_service, record_ids, *args, **kwrags):
+        try:
+            if self._version:
+                response = ServiceManager(self._url, 'report', self._version).Trasmit('render_report', db, uid, password, report_service, record_ids, args, kwrags)
+            else:
+                response = ServiceManager(self._url,'report', self._version).Trasmit('render_report', db, uid, password, report_service, record_ids, *args, **kwrags)
+            return response
+        except Exception, e:
+            print "Unknown Exception :\n  %s \n"%(e)
+            pass
