@@ -98,7 +98,7 @@ This sounds more Raw and generic but doesn't make difference in this case as cre
 
 -
 
-Odoo has every powerful workflow engine and the lib facilitate you `workflow` engine methods like Create workflow for some record, or delete the workflow, validate workflow, trigger workflow signals. Below are example of all available methods that can be used.
+Odoo has every powerful workflow engine and the lib facilitate you `workflow` engine methods like Create workflow for some record, or delete the workflow, validate workflow, trigger workflow signals. Below are example of all available methods that can be used. Suport for `worflow` is for Odoo/OpenERP v9 or earlier versionoly, from Odoov10 the workflow engone is discontinued.
 
 ```
 from odooclient import client

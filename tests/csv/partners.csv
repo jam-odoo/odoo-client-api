@@ -1,0 +1,48 @@
+Name,Parent name,Company/Company Name,Street,Street2,City,State,Country/Country Name,Zip,Is a Company,Is a Customer,Is a Vendor,Website
+ASUSTeK,,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,True,False,True,http://www.asustek.com
+Arthur Gomez,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+James Miller,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+Joseph Walters,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+Julia Rivero,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+Peter Mitchell,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+Tang Tsui,ASUSTeK,YourCompany,31 Hong Kong street,,Taipei,,Taiwan,106,False,False,True,
+Pieter Parter's Farm,Administrator,YourCompany,215 Vine St,,Scranton,Pennsylvania,United States,18503,False,True,True,
+Agrolait,,YourCompany,69 rue de Namur,,Wavre,,Belgium,1300,True,True,False,http://www.agrolait.com
+Edward Foster,Agrolait,YourCompany,69 rue de Namur,,Wavre,,Belgium,1300,False,False,True,
+Laith Jubair,Agrolait,YourCompany,69 rue de Namur,,Wavre,,Belgium,1300,False,True,False,
+Michel Fletcher,Agrolait,YourCompany,69 rue de Namur,,Wavre,,Belgium,1300,False,True,False,
+Thomas Passot,Agrolait,YourCompany,69 rue de Namur,,Wavre,,Belgium,1300,False,True,False,
+Camptocamp,,YourCompany,"93, Press Avenue",,Le Bourget du Lac,,France,73377,True,True,True,http://www.camptocamp.com
+Ayaan Agarwal,Camptocamp,YourCompany,"93, Press Avenue",,Le Bourget du Lac,,France,73377,False,True,False,http://facebook.com/odoo
+Benjamin Flores,Camptocamp,YourCompany,"93, Press Avenue",,Le Bourget du Lac,,France,73377,False,True,False,
+Phillipp Miller,Camptocamp,YourCompany,"93, Press Avenue",,Le Bourget du Lac,,France,73377,False,True,False,
+China Export,,YourCompany,52 Chop Suey street,,Shanghai,,China,200000,True,True,True,http://www.chinaexport.com/
+Chao Wang,China Export,YourCompany,52 Chop Suey street,,Shanghai,,China,200000,False,True,False,
+David Simpson,China Export,YourCompany,52 Chop Suey street,,Shanghai,,China,200000,False,True,False,
+Jacob Taylor,China Export,YourCompany,52 Chop Suey street,,Shanghai,,China,200000,False,True,False,
+John M. Brown,China Export,YourCompany,52 Chop Suey street,,Shanghai,,China,200000,False,True,False,
+Coin gourmand,,YourCompany,"Rr. e Durrësit, Pall. M.C. Inerte","Kati.1, Laprakë, Tirana, Shqipëri",Tirana,,Albania,,False,True,False,
+Concrete Supply,,YourCompany,,,,,,,False,False,True,
+Delta PC,,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,True,False,True,http://www.distribpc.com/
+Charlie Bernard,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+Jessica Dupont,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+Kevin Clarke,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+Morgan Rose,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+Richard Ellis,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,False,True,
+Robert Anderson,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+Robin Smith,Delta PC,YourCompany,3661 Station Street,,Fremont,Cagliari,United States,94538,False,True,False,
+"My Company, Chicago",,YourCompany,90 Streets Avenue,,Chicago,Illinois,United States,60610,True,True,True,http://www.yourcompany.com
+Steven Hamilton,"My Company, Chicago",YourCompany,90 Streets Avenue,,Chicago,Illinois,United States,60610,False,True,False,
+Pizza Inn,,YourCompany,"#8, 1 st Floor,iscore complex","Gandhi Gramam,Gandhi Nagar",New Delhi TN,,India,607308,False,True,False,
+Robin Keunen,,YourCompany,,,,,,,False,True,False,
+The Jackson Group,,YourCompany,3203 Lamberts Branch Road,,Miami,Florida,United States,33169,True,True,False,
+Daniel Jackson,The Jackson Group,YourCompany,3203 Lamberts Branch Road,,Miami,Florida,United States,33169,False,True,False,
+William Thomas,The Jackson Group,YourCompany,3203 Lamberts Branch Road,,Miami,Florida,United States,33169,False,True,False,
+Think Big Systems,,YourCompany,89 Lingfield Tower,,London,,United Kingdom,,True,True,False,http://www.think-big.com
+Lucas Jones,Think Big Systems,YourCompany,89 Lingfield Tower,,London,,United Kingdom,,False,True,False,
+YourCompany,,YourCompany,1725 Slough Ave.,,Scranton,Pennsylvania,United States,18540,True,False,False,http://www.example.com
+Administrator,,YourCompany,215 Vine St,,Scranton,Pennsylvania,United States,18503,False,False,False,
+Demo Portal User,,YourCompany,"Rue Cesar de Paepe, 43",,Vivegnis,,Belgium,4683,False,True,False,
+Demo User,,YourCompany,"Avenue des Dessus-de-Lives, 2",,Namur (Loyers),,Belgium,5101,False,False,False,
+Mark Davis,YourCompany,YourCompany,1725 Slough Ave.,,Scranton,Pennsylvania,United States,18540,False,False,False,
+Roger Scott,YourCompany,YourCompany,1725 Slough Ave.,,Scranton,Pennsylvania,United States,18540,False,False,False,

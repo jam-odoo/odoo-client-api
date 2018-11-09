@@ -21,7 +21,7 @@ _logger = logging.getLogger("OdooClient ")
 pp = pprint.PrettyPrinter(indent=4)
 
 
-def _read_csv_data(path):
+def read_csv_data(path):
     """
     Reads CSV from given path and Return list of dict with Mapping
     """
@@ -34,7 +34,7 @@ def _read_csv_data(path):
         data_lines.append(items)
     return data_lines
 
-def _get_field_mapping(values, mapping):
+def get_field_mapping(values, mapping):
     """
     Final Field Mapper for the Preparing Data for the Import Data
     use for def load in orm
@@ -48,11 +48,11 @@ def _get_field_mapping(values, mapping):
             data_lst.append(value)
     return fields, data_lst
 
-def _read_xls(fname):
+def read_xls(fname):
     """ Read file content, using xlrd lib """
     return xlrd.open_workbook(fname)
 
-def _read_xls_sheet(sheet):
+def read_xls_sheet(sheet):
     for row in itertools.imap(sheet.row, range(sheet.nrows)):
         values = []
         for cell in row:
