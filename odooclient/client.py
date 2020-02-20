@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import logging
@@ -126,7 +127,7 @@ class OdooClient(object):
         """
         if not context:
             context = {}
-        if type(document_ids) not in (int, long, list, tuple):
+        if type(document_ids) not in (int, complex, list, tuple):
             msg = "Invalid ids `type` {ids}. Ids should be on type `int`, \
                                     `long`, `list` or 'tuple'.".format(ids=ids)
             return (False, msg)
